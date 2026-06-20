@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block title %}{{ route.route_name }}{% endblock %}
+{% block page_title %}{{ route.route_name }}{% endblock %}
+{% block content %}<p><strong>Origin:</strong> {{ route.origin }} → <strong>Destination:</strong> {{ route.destination }}</p><p>Distance: {{ route.distance_km }} km | Duration: {{ route.estimated_duration }}</p><p>Base Fare: KES {{ route.base_fare }}</p><h5>Stops</h5><ul>{% for stop in stops %}<li>{{ stop.name }} ({{ stop.distance_from_origin }} km) - KES {{ stop.fare_from_origin }}</li>{% endfor %}</ul>{% endblock %}

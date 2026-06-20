@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block title %}{{ sacco.name }}{% endblock %}
+{% block page_title %}{{ sacco.name }}{% endblock %}
+{% block content %}<p><strong>Reg:</strong> {{ sacco.registration_number }}</p><p><strong>Status:</strong> {{ sacco.get_status_display }}</p><p><strong>Commission:</strong> {{ sacco.commission_rate }}%</p>{% endblock %}

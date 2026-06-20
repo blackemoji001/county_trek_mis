@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Payment Receipt{% endblock %}
+{% block page_title %}Payment Successful{% endblock %}
+{% block content %}
+<div class="row justify-content-center"><div class="col-md-6"><div class="card modern-card text-center"><div class="card-body"><i class="fas fa-check-circle fa-4x text-success mb-3"></i><h4>Thank You!</h4><hr><p><strong>Receipt:</strong> {{ payment.mpesa_receipt_number }}</p><p><strong>Amount:</strong> KES {{ payment.amount }}</p><p><strong>Booking:</strong> {{ booking.booking_reference }}</p><a href="{% url 'bookings:booking_detail' booking.booking_reference %}" class="btn btn-primary">View Ticket</a></div></div></div></div>
+{% endblock %}

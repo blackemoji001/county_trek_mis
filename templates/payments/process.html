@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}M-Pesa Payment{% endblock %}
+{% block page_title %}Complete Payment{% endblock %}
+{% block content %}
+<div class="row justify-content-center"><div class="col-md-6"><div class="card modern-card text-center"><div class="card-body"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/M-PESA_LOGO.svg/320px-M-PESA_LOGO.svg.png" alt="M-Pesa" style="height:60px;" class="mb-3"><h5>Booking: {{ booking.booking_reference }}</h5><p>Amount: <strong>KES {{ booking.total_amount }}</strong></p><form method="post">{% csrf_token %}<div class="mb-3"><input type="tel" name="phone_number" class="form-control" placeholder="M-Pesa Phone (+254)" value="{{ user.phone_number }}" required></div><button type="submit" class="btn btn-success btn-lg w-100"><i class="fas fa-mobile-alt"></i> Pay with M-Pesa</button></form><small class="text-muted mt-2 d-block">You will receive an STK push on your phone.</small></div></div></div></div>
+{% endblock %}

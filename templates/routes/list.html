@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block title %}Routes{% endblock %}
+{% block page_title %}Routes{% endblock %}
+{% block content %}<a href="{% url 'routes:create' %}" class="btn btn-primary mb-3">Add Route</a><div class="card modern-card"><div class="card-body p-0"><div class="table-responsive"><table class="table modern-table"><thead><tr><th>Code</th><th>Name</th><th>Origin</th><th>Destination</th><th>Fare</th></tr></thead><tbody>{% for r in routes %}<tr><td>{{ r.route_code }}</td><td><a href="{% url 'routes:detail' r.id %}">{{ r.route_name }}</a></td><td>{{ r.origin }}</td><td>{{ r.destination }}</td><td>KES {{ r.base_fare }}</td></tr>{% endfor %}</tbody></table></div></div></div>{% endblock %}

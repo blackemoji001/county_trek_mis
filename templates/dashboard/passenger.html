@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Passenger Dashboard{% endblock %}
+{% block page_title %}My Dashboard{% endblock %}
+{% block content %}
+<div class="row g-4">
+    <div class="col-md-8">
+        <div class="card modern-card">
+            <div class="card-header d-flex justify-content-between"><h5>Upcoming Trips</h5><a href="{% url 'bookings:search' %}" class="btn btn-primary btn-sm">Book New</a></div>
+            <div class="card-body">
+                {% for booking in upcoming_bookings %}
+                <div class="d-flex justify-content-between border-bottom py-2">
+                    <div><strong>{{ booking.schedule.route.origin }} → {{ booking.schedule.route.destination }}</strong><br><small>{{ booking.schedule.departure_time|date:"D, M d Y H:i" }}</small></div>
+                    <span class="status-badge status-{{ booking.status|lower }}">{{ booking.get_status_display }}</span>
+                </div>
+                {% empty %}<p class="text-muted">No upcoming trips. <a href="{% url 'bookings:search' %}">Search now</a></p>{% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

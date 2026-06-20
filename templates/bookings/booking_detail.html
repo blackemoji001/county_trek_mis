@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Booking {{ booking.booking_reference }}{% endblock %}
+{% block page_title %}Booking Details{% endblock %}
+{% block content %}
+<div class="row"><div class="col-md-8"><div class="card modern-card"><div class="card-body"><h5>Booking Reference: {{ booking.booking_reference }}</h5><hr><p><strong>Route:</strong> {{ booking.schedule.route.origin }} → {{ booking.schedule.route.destination }} ({{ booking.schedule.route.route_name }})</p><p><strong>Date & Time:</strong> {{ booking.schedule.departure_time|date:"M d, Y H:i" }}</p><p><strong>Vehicle:</strong> {{ booking.schedule.vehicle.registration_number }} - {{ booking.schedule.vehicle.make }} {{ booking.schedule.vehicle.model }}</p><p><strong>Status:</strong> <span class="status-badge status-{{ booking.status|lower }}">{{ booking.get_status_display }}</span></p><p><strong>Total:</strong> KES {{ booking.total_amount }}</p><h6>Passengers & Seats</h6><ul>{% for seat in booking.booking_seats.all %}<li>Seat {{ seat.seat.seat_number }} - {{ seat.passenger_name }} ({{ seat.passenger_phone }})</li>{% endfor %}</ul>{% if booking.status == 'PENDING' %}<a href="{% url 'payments:process' booking.booking_reference %}" class="btn btn-success">Pay Now (M-Pesa)</a>{% endif %}</div></div></div></div>
+{% endblock %}

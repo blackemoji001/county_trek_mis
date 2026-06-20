@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Add SACCO Manager{% endblock %}
+{% block page_title %}Add SACCO Manager{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card modern-card">
+            <div class="card-header">New SACCO Manager</div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3"><input type="text" name="first_name" class="form-control" placeholder="First Name" required></div>
+                    <div class="mb-3"><input type="text" name="last_name" class="form-control" placeholder="Last Name" required></div>
+                    <div class="mb-3"><input type="email" name="email" class="form-control" placeholder="Email" required></div>
+                    <div class="mb-3"><input type="text" name="phone_number" class="form-control" placeholder="Phone (07XXXXXXXX)" required></div>
+                    <div class="mb-3">
+                        <select name="sacco_id" class="form-select" required>
+                            <option value="">Select SACCO</option>
+                            {% for s in saccos %}<option value="{{ s.id }}">{{ s.name }}</option>{% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3"><label>Temporary Password</label><input type="text" class="form-control" value="{{ temp_password }}" readonly></div>
+                    <div class="form-check mb-2"><input type="checkbox" name="send_email" class="form-check-input" checked><label>Send via Email</label></div>
+                    <div class="form-check mb-3"><input type="checkbox" name="send_sms" class="form-check-input" checked><label>Send via SMS</label></div>
+                    <button type="submit" class="btn btn-primary">Create Manager</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Create Schedule{% endblock %}
+{% block page_title %}Create Schedule{% endblock %}
+{% block content %}<div class="col-md-8 mx-auto"><div class="card modern-card"><div class="card-body"><form method="post">{% csrf_token %}<div class="row"><div class="col-md-6 mb-3"><select name="route" class="form-select" required><option value="">Select Route</option>{% for r in routes %}<option value="{{ r.id }}">{{ r.route_name }}</option>
+    {% endfor %}</select></div><div class="col-md-6 mb-3"><select name="vehicle" class="form-select" required><option value="">Select Vehicle</option>{% for v in vehicles %}<option value="{{ v.id }}">{{ v.registration_number }}</option>{% endfor %}</select></div></div><div class="row"><div class="col-md-6 mb-3"><select name="driver" class="form-select"><option value="">Driver</option>{% for d in drivers %}<option value="{{ d.id }}">{{ d.user.get_full_name }}</option>{% endfor %}</select></div><div class="col-md-6 mb-3"><select name="conductor" class="form-select"><option value="">Conductor</option>{% for c in conductors %}<option value="{{ c.id }}">{{ c.user.get_full_name }}</option>{% endfor %}</select></div></div><div class="row"><div class="col-md-6 mb-3"><input type="datetime-local" name="departure_time" class="form-control" required></div>
+    <div class="col-md-6 mb-3"><input type="datetime-local" name="arrival_time" class="form-control" required></div></div>
+    <div class="row">
+        <select name="day_of_week" class="form-select" required>
+    <option value="">Select Day</option>
+    <option value="MON">Monday</option>
+    <option value="TUE">Tuesday</option>
+    <option value="WED">Wednesday</option>
+    <option value="THU">Thursday</option>
+    <option value="FRI">Friday</option>
+    <option value="SAT">Saturday</option>
+    <option value="SUN">Sunday</option>
+</select>
+    <div class="col-md-4 mb-3"><input name="fare" type="number" class="form-control" placeholder="Fare (KES)" required></div></div><button type="submit" class="btn btn-success">Create Schedule</button></form></div></div></div>{% endblock %}

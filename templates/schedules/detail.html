@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block title %}Schedule Detail{% endblock %}
+{% block page_title %}Schedule{% endblock %}
+{% block content %}<p>Route: {{ schedule.route }}</p><p>Departure: {{ schedule.departure_time }}</p><p>Arrival: {{ schedule.arrival_time }}</p><p>Vehicle: {{ schedule.vehicle }}</p><p>Fare: KES {{ schedule.fare }}</p>{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block page_title %}System Admin Dashboard{% endblock %}
+{% block content %}
+<div class="stats-grid">
+    <div class="stat-card gradient-primary"><div class="stat-icon"><i class="fas fa-building"></i></div><div class="stat-info"><h3>{{ total_saccos }}</h3><p>Total SACCOs</p></div></div>
+    <div class="stat-card gradient-success"><div class="stat-icon"><i class="fas fa-users"></i></div><div class="stat-info"><h3>{{ total_users }}</h3><p>Total Users</p></div></div>
+    <div class="stat-card gradient-info"><div class="stat-icon"><i class="fas fa-bus"></i></div><div class="stat-info"><h3>{{ total_vehicles }}</h3><p>Total Vehicles</p></div></div>
+    <div class="stat-card gradient-warning"><div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div><div class="stat-info"><h3>KES {{ total_revenue|floatformat:0 }}</h3><p>Revenue</p></div></div>
+</div>
+<div class="card modern-card mt-4">
+    <div class="card-header"><h5>Recent Bookings</h5></div>
+    <div class="card-body p-0">
+        <div class="table-responsive"><table class="table modern-table"><thead><tr><th>Reference</th><th>Passenger</th><th>Route</th><th>Amount</th><th>Status</th></tr></thead><tbody>{% for b in recent_bookings %}<tr><td>{{ b.booking_reference }}</td><td>{{ b.passenger.get_full_name }}</td><td>{{ b.schedule.route.route_name }}</td><td>KES {{ b.total_amount }}</td><td><span class="status-badge status-{{ b.status|lower }}">{{ b.get_status_display }}</span></td></tr>{% empty %}<tr><td colspan="5">No bookings</td></tr>{% endfor %}</tbody></table></div>
+    </div>
+</div>
+{% endblock %}

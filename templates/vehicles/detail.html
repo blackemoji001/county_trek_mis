@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block title %}{{ vehicle.registration_number }}{% endblock %}
+{% block page_title %}{{ vehicle.registration_number }}{% endblock %}
+{% block content %}<p><strong>Type:</strong> {{ vehicle.get_vehicle_type_display }}</p><p><strong>Make/Model:</strong> {{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }})</p><p><strong>Capacity:</strong> {{ vehicle.capacity }} seats</p><h5>Seat Layout</h5><div class="seat-map">{% for row, seats in seat_rows.items %}<div class="d-flex justify-content-center">{% for seat in seats %}<span class="badge bg-light text-dark m-1" style="width:40px;">{{ seat.seat_number }}</span>{% if seat.column == 'B' %}<span class="mx-2">|</span>{% endif %}{% endfor %}</div>{% endfor %}</div>{% endblock %}

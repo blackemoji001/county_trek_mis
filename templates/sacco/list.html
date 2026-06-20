@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}SACCOs{% endblock %}
+{% block page_title %}SACCOs{% endblock %}
+{% block content %}
+<a href="{% url 'saccos:create' %}" class="btn btn-primary mb-3">Add SACCO</a>
+<div class="card modern-card"><div class="card-body p-0"><div class="table-responsive"><table class="table modern-table"><thead><tr><th>Name</th><th>Registration</th><th>Status</th><th></th></tr></thead><tbody>{% for s in saccos %}<tr><td>{{ s.name }}</td><td>{{ s.registration_number }}</td><td>{{ s.get_status_display }}</td><td><a href="{% url 'saccos:detail' s.id %}" class="btn btn-sm btn-info">View</a></td></tr>{% endfor %}</tbody></table></div></div></div>
+{% endblock %}

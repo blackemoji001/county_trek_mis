@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block title %}Schedules{% endblock %}
+{% block page_title %}Schedules{% endblock %}
+{% block content %}<a href="{% url 'schedules:create' %}" class="btn btn-primary mb-3">Add Schedule</a><div class="card modern-card"><div class="card-body p-0"><div class="table-responsive"><table class="table modern-table"><thead><tr><th>Route</th><th>Vehicle</th><th>Departure</th><th>Arrival</th><th>Fare</th><th>Seats</th></tr></thead><tbody>{% for s in schedules %}<tr><td>{{ s.route.route_name }}</td><td>{{ s.vehicle.registration_number }}</td><td>{{ s.departure_time|date:"M d H:i" }}</td><td>{{ s.arrival_time|date:"M d H:i" }}</td><td>KES {{ s.fare }}</td><td>{{ s.available_seats }}/{{ s.vehicle.capacity }}</td></tr>{% endfor %}</tbody></table></div></div></div>{% endblock %}

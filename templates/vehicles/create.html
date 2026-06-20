@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Add Vehicle{% endblock %}
+{% block page_title %}Add Vehicle{% endblock %}
+{% block content %}
+<div class="col-md-8 mx-auto"><div class="card modern-card"><div class="card-body"><form method="post">{% csrf_token %}<div class="row"><div class="col-md-6 mb-3"><input name="registration_number" class="form-control" placeholder="Reg Number" required></div><div class="col-md-6 mb-3"><select name="vehicle_type" class="form-select"><option value="BUS">Bus</option><option value="MINIBUS">Minibus</option><option value="VAN">Van</option></select></div></div><div class="row"><div class="col-md-6 mb-3"><input name="make" class="form-control" placeholder="Make"></div><div class="col-md-6 mb-3"><input name="model" class="form-control" placeholder="Model"></div></div><div class="row"><div class="col-md-4 mb-3"><input name="year" type="number" class="form-control" placeholder="Year"></div><div class="col-md-4 mb-3"><input name="capacity" type="number" class="form-control" placeholder="Seating Capacity" required></div><div class="col-md-4 mb-3"><input name="insurance_expiry" type="date" class="form-control"></div></div><div class="mb-3"><input name="road_worthiness_expiry" type="date" class="form-control"></div><button type="submit" class="btn btn-success">Add Vehicle</button></form></div></div></div>
+{% endblock %}

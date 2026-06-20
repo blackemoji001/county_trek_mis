@@ -1,0 +1,41 @@
+{% extends 'base_auth.html' %}
+{% load static %}
+{% block title %}Register - County Trek MIS{% endblock %}
+{% block auth_content %}
+<div class="auth-card">
+    <div class="text-center mb-4">
+        <h2>Create Passenger Account</h2>
+        <p class="text-muted">Book tickets with ease</p>
+    </div>
+    <form method="post" action="{% url 'accounts:register_passenger' %}">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6 mb-3"><div class="form-floating"><input type="text" name="first_name" class="form-control" placeholder="First Name" required><label>First Name</label></div></div>
+            <div class="col-md-6 mb-3"><div class="form-floating"><input type="text" name="last_name" class="form-control" placeholder="Last Name" required><label>Last Name</label></div></div>
+        </div>
+        <div class="form-floating mb-3"><input type="email" name="email" class="form-control" placeholder="Email" required><label>Email</label></div>
+        <div class="form-floating mb-3">
+    <input type="tel" name="phone_number" id="phone_number" class="form-control" 
+           placeholder="712345678" pattern="[0-9]{9}" 
+           title="9 digits starting with 7 (e.g. 712345678)" required>
+    <label for="phone_number">Phone (e.g. 712345678)</label>
+</div>
+<small class="text-muted d-block mb-2">Enter 9 digits without 0 or +254</small>
+        <div class="form-floating mb-3"><input type="password" name="password1" id="password1" class="form-control" placeholder="Password" required><label>Password</label></div>
+        <div class="password-strength mb-3"><div class="progress" style="height:5px;"><div class="progress-bar" id="strengthBar"></div></div><small id="strengthText"></small></div>
+        <button type="submit" class="btn btn-primary w-100 btn-lg">Register</button>
+    </form>
+    <div class="text-center mt-3">Already have an account? <a href="{% url 'accounts:login' %}">Login</a></div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script>
+document.getElementById('password1').addEventListener('input', function(){
+    const p = this.value; let s=0;
+    if(p.length>=8) s+=25; if(/[a-z]/.test(p)) s+=25; if(/[A-Z]/.test(p)) s+=25; if(/[0-9]/.test(p)) s+=12.5; if(/[^A-Za-z0-9]/.test(p)) s+=12.5;
+    const bar = document.getElementById('strengthBar'); bar.style.width=s+'%';
+    bar.className = 'progress-bar ' + (s<50?'bg-danger':(s<75?'bg-warning':'bg-success'));
+    document.getElementById('strengthText').textContent = s<50?'Weak':(s<75?'Medium':'Strong');
+});
+</script>
+{% endblock %}

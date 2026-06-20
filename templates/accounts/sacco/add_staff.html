@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Add Staff{% endblock %}
+{% block page_title %}Add Staff Member{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card modern-card">
+            <div class="card-header">New Staff</div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3"><input type="text" name="first_name" class="form-control" placeholder="First Name" required></div>
+                    <div class="mb-3"><input type="text" name="last_name" class="form-control" placeholder="Last Name" required></div>
+                    <div class="mb-3"><input type="email" name="email" class="form-control" placeholder="Email" required></div>
+                    <div class="mb-3"><input type="text" name="phone_number" class="form-control" placeholder="Phone (07XXXXXXXX)" required></div>
+                    <div class="mb-3">
+                        <select name="staff_type" id="staffType" class="form-select" required>
+                            <option value="">Select Role</option>
+                            <option value="driver">Driver</option>
+                            <option value="conductor">Conductor</option>
+                            <option value="booking_agent">Booking Agent</option>
+                        </select>
+                    </div>
+                    <div id="driverFields" style="display:none;">
+                        <div class="mb-3"><input type="text" name="license_number" class="form-control" placeholder="License Number"></div>
+                        <div class="mb-3"><input type="date" name="license_expiry" class="form-control"></div>
+                        <div class="mb-3"><input type="number" name="experience_years" class="form-control" placeholder="Experience (years)" value="0"></div>
+                    </div>
+                    <div id="conductorFields" style="display:none;">
+                        <div class="mb-3"><input type="text" name="employee_id" class="form-control" placeholder="Employee ID"></div>
+                    </div>
+                    <div class="mb-3"><label>Temporary Password</label><input type="text" class="form-control" value="{{ temp_password }}" readonly></div>
+                    <div class="form-check mb-3"><input type="checkbox" name="send_credentials" class="form-check-input" checked><label>Send via SMS</label></div>
+                    <button type="submit" class="btn btn-primary">Add Staff</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script>
+document.getElementById('staffType').addEventListener('change', function(){
+    document.getElementById('driverFields').style.display = this.value==='driver'?'block':'none';
+    document.getElementById('conductorFields').style.display = this.value==='conductor'?'block':'none';
+});
+</script>
+{% endblock %}

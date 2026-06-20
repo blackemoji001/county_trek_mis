@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Manage Staff{% endblock %}
+{% block page_title %}Staff Management - {{ sacco.name }}{% endblock %}
+{% block content %}
+<div class="mb-3"><a href="{% url 'accounts:add_staff' %}" class="btn btn-primary">Add Staff</a></div>
+<h5>Drivers</h5>
+<div class="table-responsive"><table class="table"><thead><tr><th>Name</th><th>License</th><th>Experience</th><th>Vehicle</th></tr></thead><tbody>{% for d in drivers %}<tr><td>{{ d.user.get_full_name }}</td><td>{{ d.license_number }}</td><td>{{ d.experience_years }} yrs</td><td>{% if d.assigned_vehicle %}{{ d.assigned_vehicle.registration_number }}{% else %}-{% endif %}</td></tr>{% endfor %}</tbody></table></div>
+<h5>Conductors</h5>
+<div class="table-responsive"><table class="table"><thead><tr><th>Name</th><th>Employee ID</th><th>Trips Today</th></tr></thead><tbody>{% for c in conductors %}<tr><td>{{ c.user.get_full_name }}</td><td>{{ c.employee_id }}</td><td>{{ c.trips_today }}</td></tr>{% endfor %}</tbody></table></div>
+<h5>Booking Agents</h5>
+<div class="table-responsive"><table class="table"><thead><tr><th>Name</th><th>Phone</th></tr></thead><tbody>{% for a in booking_agents %}<tr><td>{{ a.get_full_name }}</td><td>{{ a.phone_number }}</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

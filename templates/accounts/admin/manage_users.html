@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Manage Users{% endblock %}
+{% block page_title %}User Management{% endblock %}
+{% block content %}
+<div class="mb-3"><a href="{% url 'accounts:add_sacco_manager' %}" class="btn btn-primary">Add SACCO Manager</a></div>
+<div class="card modern-card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table modern-table">
+                <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>SACCO</th><th>Actions</th></tr></thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.get_full_name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.get_role_display }}</td>
+                        <td>{{ user.sacco.name|default:"-" }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning" onclick="resetPassword('{{ user.id }}')">Reset Pwd</button>
+                            <button class="btn btn-sm btn-danger" onclick="deactivateUser('{{ user.id }}')">Deactivate</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script>
+function resetPassword(uid){ fetch(`/accounts/api/users/${uid}/reset-password/`,{method:'POST',headers:{'X-CSRFToken':'{{ csrf_token }}'}}).then(r=>r.json()).then(d=>alert('New password: '+d.temp_password)); }
+function deactivateUser(uid){ if(confirm('Deactivate?')){ fetch(`/accounts/api/users/${uid}/deactivate/`,{method:'POST',headers:{'X-CSRFToken':'{{ csrf_token }}'}}).then(()=>location.reload()); } }
+</script>
+{% endblock %}
